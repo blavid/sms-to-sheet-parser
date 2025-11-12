@@ -17,7 +17,7 @@ export default defineComponent({
       throw new Error('No SMS text found in email body (neither text nor HTML)');
     }
     // Log the extracted SMS for debugging
-    console.log('Extracted SMS:', smsText);
+    // console.log('Extracted SMS:', smsText);
     // Array to store all transactions
     let transactions = [];
     // Editable array of payees to exclude (payments, not expenses)
