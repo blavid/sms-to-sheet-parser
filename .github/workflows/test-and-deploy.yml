@@ -1,0 +1,33 @@
+name: Test & Deploy to Pipedream
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm test
+        env:
+          NODE_OPTIONS: --experimental-vm-modules
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Pipedream
+        uses: pipedreamhq/pipedream-github-action@v1
+        with:
+          workflow_file: src/index.js
+          pipedream_token: ${{ secrets.PIPEDREAM_TOKEN }}
+          workflow_id: your-workflow-id-here  # Get from URL

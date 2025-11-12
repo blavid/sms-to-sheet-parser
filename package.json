@@ -1,0 +1,14 @@
+{
+  "name": "sms-to-sheet-parser",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "node-html-parser": "^6.1.13"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
